@@ -99,7 +99,7 @@ sudo systemctl restart nginx
 * Open browser:
 
 ```
-http://<public-ip>
+http://<ec2-public-ip>
 ```
 
 * Output:
@@ -197,17 +197,3 @@ Built as part of hands-on cloud and DevOps learning journey.
 
 ```
 
----
-
-## 👍 One quick improvement (don’t skip)
-
-After pasting:
-- Add your **GitHub repo link in LinkedIn post**
-- Make sure screenshots are inside `/screenshots` folder and match names
-
----
-
-If you want next:
-👉 say **“ready for project 5”**  
-We’ll move into **S3 + 403 Forbidden (IAM + policies)** — deeper and more interview-relevant.
-```
