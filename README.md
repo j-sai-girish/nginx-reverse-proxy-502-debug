@@ -195,5 +195,4 @@ This project simulates a real-world scenario where a web server is running but t
 
 Built as part of hands-on cloud and DevOps learning journey.
 
-```
 
