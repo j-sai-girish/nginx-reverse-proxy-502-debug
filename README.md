@@ -1,10 +1,3 @@
-Good—this is the final polish that makes your project look **professional, not just completed**.
-
-Here’s your **updated README (clean, structured, no unnecessary duplication, with screenshots properly embedded):**
-
----
-
-````markdown
 # NGINX Reverse Proxy + 502 Bad Gateway Debugging
 
 ## 📌 Project Overview
