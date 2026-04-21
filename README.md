@@ -1,8 +1,14 @@
+Good—this is the final polish that makes your project look **professional, not just completed**.
 
+Here’s your **updated README (clean, structured, no unnecessary duplication, with screenshots properly embedded):**
+
+---
+
+````markdown
 # NGINX Reverse Proxy + 502 Bad Gateway Debugging
 
 ## 📌 Project Overview
-This project demonstrates how NGINX acts as a reverse proxy for a Flask backend and how backend failures result in a 502 Bad Gateway error. It also covers step-by-step troubleshooting and resolution.
+This project demonstrates how NGINX acts as a reverse proxy for a Flask backend hosted on an AWS EC2 instance. It also simulates a real-world failure scenario where the backend goes down, resulting in a **502 Bad Gateway** error, and shows how to debug and resolve it.
 
 ---
 
@@ -31,20 +37,9 @@ sudo dnf install python3 -y
 pip3 install flask
 ````
 
-### 3. Create Flask Backend
-
-```bash
-nano app.py
-```
+### 3. Create Flask Backend (`app.py`)
 
 ```python
-from flask import Flask
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    return "Hello from Backend"
-
 app.run(host="0.0.0.0", port=5000)
 ```
 
@@ -58,13 +53,7 @@ python3 app.py
 
 ## 🔧 Configure Reverse Proxy
 
-Edit NGINX config:
-
-```bash
-sudo nano /etc/nginx/nginx.conf
-```
-
-Inside `server {}` block:
+Edit NGINX configuration and add:
 
 ```nginx
 location / {
@@ -72,15 +61,15 @@ location / {
 }
 ```
 
+👉 This forwards incoming requests from port 80 to the backend running on port 5000.
+
 ---
 
 ### 5. Allow HTTP Traffic
 
-* Go to EC2 Security Group
-* Add inbound rule:
+* Add inbound rule in Security Group:
 
-  * Type: HTTP
-  * Port: 80
+  * Port 80 (HTTP)
   * Source: 0.0.0.0/0
 
 ---
@@ -96,13 +85,13 @@ sudo systemctl restart nginx
 
 ## ✅ Working State
 
-* Open browser:
+Open:
 
 ```
-http://<ec2-public-ip>
+http://<public-ip>
 ```
 
-* Output:
+Output:
 
 ```
 Hello from Backend
@@ -133,7 +122,7 @@ CTRL + C
 
 ## 🔍 Root Cause Analysis
 
-Check running processes:
+Check backend process:
 
 ```bash
 ps aux | grep app.py
@@ -154,20 +143,33 @@ Restart backend:
 python3 app.py
 ```
 
-### Result:
-
-* Application works again
-
 ---
 
 ## 📸 Screenshots
 
-1. Backend Running (Flask on port 5000)
-2. NGINX Configuration (proxy_pass)
-3. Working Output (Hello from Backend)
-4. 502 Error Page
-5. Backend Not Running (ps command)
-6. Security Group (Port 80 open)
+### 1. Backend Running
+
+![Backend Running](screenshots/1-backend-running-flask-5000.png)
+
+### 2. NGINX Configuration
+
+![NGINX Config](screenshots/2-nginx-config-proxy-pass.png)
+
+### 3. Working Output
+
+![Working](screenshots/3-working-output-browser.png)
+
+### 4. 502 Error
+
+![502 Error](screenshots/4-502-bad-gateway-error.png)
+
+### 5. Root Cause (Backend Down)
+
+![Backend Down](screenshots/5-backend-process-not-running.png)
+
+### 6. Security Group Check
+
+![Security Group](screenshots/6-security-group-port-80-open.png)
 
 ---
 
@@ -177,7 +179,7 @@ python3 app.py
 * Difference between frontend and backend
 * Importance of backend availability
 * Understanding 502 Bad Gateway error
-* Layered debugging approach:
+* Step-by-step debugging approach:
 
   * Network (Security Group)
   * Server (NGINX)
@@ -187,7 +189,7 @@ python3 app.py
 
 ## 💡 Conclusion
 
-This project simulates a real-world scenario where a web server is running but the backend service is down. It demonstrates how to identify, debug, and resolve such issues effectively.
+This project simulates a real-world issue where a web server is running but the backend service is down. It demonstrates how to identify the problem, verify the root cause, and restore service efficiently.
 
 ---
 
@@ -195,4 +197,4 @@ This project simulates a real-world scenario where a web server is running but t
 
 Built as part of hands-on cloud and DevOps learning journey.
 
-
+```
